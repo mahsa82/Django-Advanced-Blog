@@ -2,7 +2,9 @@ from django.shortcuts import render
 from django.views.generic.base import TemplateView,RedirectView
 from .models import Post
 from django.shortcuts import get_object_or_404
-from django.views.generic.list import ListView
+from django.views.generic import ListView,DetailView,FormView,CreateView,UpdateView,DeleteView
+from .forms import PostForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 #function base view show a template.
 """
@@ -43,7 +45,46 @@ class RedirectToMaktab(RedirectView):
         return super().get_redirect_url(*args, **kwargs)
 
 
-class PostList(ListView):
+class PostListView(ListView):
     model = Post
     context_object_name = "posts"
+    ordering = 'id'
+    paginate_by = 2
+ 
+ 
+class PostDetailView(DetailView):
+    model = Post
+"""    
+class PostCreateView(FormView):
+    template_name = 'blog/contact.html'
+    form_class = PostForm
+    success_url = '/blog/post/'
+    
+    def form_valid(self,form):
+        form.save()
+        return super().form_valid(form)
+"""
+
+class PostCreateView(CreateView):
+    model = Post
+    #fields = ['author', 'title','content','status','category','published_date']
+    form_class = PostForm
+    success_url = '/blog/post/'
+    
+    def form_valid (self,form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+    
+    
+class PostEditView(UpdateView):
+    model = Post
+    form_class = PostForm
+    success_url ='/blog/post/'
+    
+class PostDeleteView(DeleteView):
+    model = Post
+    success_url = "/blog/post/"
+    
+
+
     

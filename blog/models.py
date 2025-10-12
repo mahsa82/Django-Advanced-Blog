@@ -13,7 +13,7 @@ class Post(models.Model):
     status = models.BooleanField()
     category = models.ForeignKey('Category' , on_delete=models.SET_NULL,null=True)
     image = models.ImageField()
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    author = models.ForeignKey('account.Profile', on_delete=models.CASCADE)
     
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
