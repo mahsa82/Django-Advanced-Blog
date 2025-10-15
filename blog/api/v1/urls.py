@@ -5,7 +5,8 @@ from django.views.generic.base import RedirectView
 from rest_framework.routers import DefaultRouter
 
 router =DefaultRouter()
-router.register('post',views.PostViewSet,basename='post')
+router.register('post',views.PostModelViewSet,basename='post')
+router.register('category',views.CategoryModelViewSet,basename='category')
 
 app_name = "api-v1"
 
