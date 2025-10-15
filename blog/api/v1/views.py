@@ -7,6 +7,8 @@ from rest_framework import status
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 from rest_framework.views import APIView
+from rest_framework.generics import GenericAPIView,ListAPIView,ListCreateAPIView,RetrieveUpdateDestroyAPIView
+from rest_framework import mixins
 
 """@api_view(["GET","POST"])
 @permission_classes([IsAuthenticatedOrReadOnly])
@@ -21,7 +23,7 @@ def postList(request):
         serializer.save()
         return Response(serializer.data)"""
         
-class PostList(APIView):
+'''class PostList(APIView):
     """getting a list of posts and creating new posts"""
     permission_classes = [IsAuthenticatedOrReadOnly]
     serializer_class = PostSerializer
@@ -35,7 +37,14 @@ class PostList(APIView):
         serializer = PostSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
-        return Response(serializer.data)
+        return Response(serializer.data)'''
+        
+class PostList(ListCreateAPIView):
+    """getting a list of posts and creating new posts"""
+    permission_classes = [IsAuthenticatedOrReadOnly]
+    serializer_class = PostSerializer
+    queryset = Post.objects.filter(status=True)
+    
 
 
 """@api_view(["GET","PUT","DELETE"])
@@ -54,7 +63,7 @@ def postDetail(request,id):
         return Response({"detail":"item remove successfully"},status=status.HTTP_204_NO_CONTENT)"""
         
 
-class PostDetail(APIView):
+'''class PostDetail(APIView):
     """getting detail of the post and edit plus removing it"""
     permission_classes = [IsAuthenticatedOrReadOnly]
     serializer_class = PostSerializer
@@ -74,5 +83,28 @@ class PostDetail(APIView):
         """deleting a post data"""
         post = get_object_or_404(Post,pk=id,status=True)
         post.delete()
-        return Response({"detail":"item remove successfully"},status=status.HTTP_204_NO_CONTENT)        
+        return Response({"detail":"item remove successfully"},status=status.HTTP_204_NO_CONTENT)  '''
         
+#post detail with mixines      
+        
+'''class PostDetail(GenericAPIView,mixins.RetrieveModelMixin,mixins.UpdateModelMixin,mixins.DestroyModelMixin):
+    """getting detail of the post and edit plus removing it"""
+    permission_classes = [IsAuthenticatedOrReadOnly]
+    serializer_class = PostSerializer
+    queryset = Post.objects.filter(status=True)
+    
+    def get(self,request,*args,**kwargs):
+        """retriving the post data"""
+        return self.retrieve(request,*args,**kwargs)
+    
+    def put(self,request,*args,**kwargs):
+        return self.update(request,*args,**kwargs)
+    
+    def delete(self, request, *args, **kwargs):
+        return self.destroy(self, request, *args, **kwargs)'''
+    
+class PostDetail(RetrieveUpdateDestroyAPIView):
+    permission_classes = [IsAuthenticatedOrReadOnly]
+    serializer_class = PostSerializer
+    queryset = Post.objects.filter(status=True)
+    
