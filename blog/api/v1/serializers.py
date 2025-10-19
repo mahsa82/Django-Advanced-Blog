@@ -13,6 +13,7 @@ class CategorySerializer(serializers.ModelSerializer):
         
 
 class PostSerializer(serializers.ModelSerializer):
+    published_date = serializers.DateTimeField(format="%Y-%m-%d %H:%M:%S")
     snippet = serializers.ReadOnlyField(source='get_snippet')
     relative_url = serializers.URLField(source='get_absolute_api_url',read_only=True)
     absolute_url = serializers.SerializerMethodField()
