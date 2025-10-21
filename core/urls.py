@@ -41,7 +41,7 @@ schema_view = get_schema_view(
 urlpatterns = [
     path("admin/", admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
-    path("accounts/",include('django.contrib.auth.urls')),
+    path("account/", include('account.urls')),
     path("blog/", include('blog.urls')),
     path('api-docs/',include_docs_urls(title='api sample')),
     path('swagger/output.json', schema_view.without_ui(cache_timeout=0), name='schema-json'),

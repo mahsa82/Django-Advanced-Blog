@@ -40,8 +40,10 @@ INSTALLED_APPS = [
     "account.apps.AccountConfig",
     "blog.apps.BlogConfig",
     "rest_framework",
+    'rest_framework.authtoken',
     "django_filters",
     'drf_yasg',
+    
 ]
 
 MIDDLEWARE = [
@@ -142,11 +144,10 @@ AUTH_USER_MODEL ='account.User'
 
 #rest_framework setting
 REST_FRAMEWORK = {
-    # 'DEFAULT_PERMISSION_CLASSES': [
-    #     'rest_framework.permissions.IsAuthenticated',
-    # ]
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
 }
-
-REST_FRAMEWORK = { 
-                  'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema' 
-                  }
