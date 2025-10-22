@@ -4,7 +4,7 @@ from django.contrib.auth.password_validation import validate_password
 from django.core import exceptions
 from django.contrib.auth import authenticate
 from django.utils.translation import gettext_lazy as _
-
+from rest_framework_simplejwt.views import TokenObtainPairView
 
 
 class RegistrationSerializer(serializers.ModelSerializer):
@@ -64,3 +64,9 @@ class CustomAuthTokenSerializer(serializers.Serializer):
 
         attrs['user'] = user
         return attrs
+    
+class CustomTokenObtainPairSerializer(TokenObtainPairView):
+    def validate(self,attrs):
+        validated_data = super().validate(attrs)
+        
+        return validated_data
