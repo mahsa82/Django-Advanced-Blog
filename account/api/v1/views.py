@@ -47,3 +47,7 @@ class CustomDiscardAuthToken(APIView):
 
 class CustomTokenObtainPairView(TokenObtainPairView):
     serializer_class = CustomTokenObtainPairSerializer
+    
+    
+class ChangePasswordView(generics.GenericAPIView):
+    pass

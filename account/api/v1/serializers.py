@@ -70,3 +70,8 @@ class CustomTokenObtainPairSerializer(TokenObtainPairView):
         validated_data = super().validate(attrs)
         
         return validated_data
+    
+    
+class ChangePasswordSerializer(serializers.Serializer):
+    old_password = serializers.CharField(required=True)
+    
