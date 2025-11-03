@@ -13,6 +13,7 @@ from rest_framework.generics import (
     ListCreateAPIView,
     RetrieveUpdateDestroyAPIView,
 )
+from django.views.generic import TemplateView
 from rest_framework import mixins
 from rest_framework import viewsets
 from rest_framework.decorators import action
@@ -143,3 +144,5 @@ class CategoryModelViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticatedOrReadOnly]
     serializer_class = CategorySerializer
     queryset = Category.objects.all()
+
+
