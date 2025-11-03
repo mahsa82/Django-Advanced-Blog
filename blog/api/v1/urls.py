@@ -4,9 +4,9 @@ from django.views.generic import TemplateView
 from django.views.generic.base import RedirectView
 from rest_framework.routers import DefaultRouter
 
-router =DefaultRouter()
-router.register('post',views.PostModelViewSet,basename='post')
-router.register('category',views.CategoryModelViewSet,basename='category')
+router = DefaultRouter()
+router.register("post", views.PostModelViewSet, basename="post")
+router.register("category", views.CategoryModelViewSet, basename="category")
 
 app_name = "api-v1"
 
@@ -21,4 +21,4 @@ urlpatterns = router.urls
 #      path('post/<int:pk>/',views.PostViewSet.as_view({'get':'retrieve','put':'update','patch':'partial_update','delete':'destroy'}),name='post-list'),
 #      path('',include(router.urls)),
 # ]
-#urlpatterns += router.urls
+# urlpatterns += router.urls

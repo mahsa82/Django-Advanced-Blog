@@ -1,10 +1,10 @@
-from django.urls import path,include
+from django.urls import path, include
 from . import views
 from django.views.generic import TemplateView
 from django.views.generic.base import RedirectView
 
 
-app_name = 'blog'
+app_name = "blog"
 
 # urlpatterns =[
 #     #path("fbv-index/",views.indexview ,name ='fbv-test'),
@@ -18,5 +18,5 @@ app_name = 'blog'
 # ]
 
 urlpatterns = [
-    path('api/v1/',include('blog.api.v1.urls')),
+    path("api/v1/", include("blog.api.v1.urls")),
 ]

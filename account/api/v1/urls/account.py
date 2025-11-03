@@ -1,4 +1,4 @@
-from django.urls import path,include
+from django.urls import path, include
 from .. import views
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
@@ -6,21 +6,22 @@ from rest_framework_simplejwt.views import (
 )
 from rest_framework_simplejwt.views import TokenVerifyView
 
-urlpatterns =[
-    #registration
-    path('registration/',views.RegistrationApiView.as_view(),name='registration'),
-    #change password
-    path('change-password/',views.ChangePasswordView.as_view(),name='change-password'),
-    #reset password
+urlpatterns = [
+    # registration
+    path("registration/", views.RegistrationApiView.as_view(), name="registration"),
+    # change password
+    path(
+        "change-password/", views.ChangePasswordView.as_view(), name="change-password"
+    ),
+    # reset password
     # activation
-    #path('activation/confirm/')
-    path('test-email',views.TestEmailSend.as_view(),name='test-email'),
-    #login token
-    path('token/login/',views.CustomObtainAuthToken.as_view(),name='token-login'),
-    path('token/logout/',views.CustomDiscardAuthToken.as_view(),name='token-logout'),
-    #login JWT
-    path('jwt/create/',views.CustomTokenObtainPairView.as_view(),name='jwt-create'),
-    path('jwt/refresh/',TokenRefreshView.as_view(),name='jwt-refresh'),
-    path('jwt/verify/', TokenVerifyView.as_view(), name='jwt_verify'),
-
+    # path('activation/confirm/')
+    path("test-email", views.TestEmailSend.as_view(), name="test-email"),
+    # login token
+    path("token/login/", views.CustomObtainAuthToken.as_view(), name="token-login"),
+    path("token/logout/", views.CustomDiscardAuthToken.as_view(), name="token-logout"),
+    # login JWT
+    path("jwt/create/", views.CustomTokenObtainPairView.as_view(), name="jwt-create"),
+    path("jwt/refresh/", TokenRefreshView.as_view(), name="jwt-refresh"),
+    path("jwt/verify/", TokenVerifyView.as_view(), name="jwt_verify"),
 ]
